@@ -1,0 +1,53 @@
+from tkinter import *
+
+root = Tk()  # create root window
+root.title("ZEV Data Tool")  # title of the GUI window
+root.geometry("1200x800")  # specify size of the window
+root.config(bg="skyblue")  # specify background color
+root.columnconfigure(0, weight=1)  # specify column
+root.columnconfigure(1, weight=1)  # specify column
+root.columnconfigure(2, weight=1)  # specify column
+root.columnconfigure(3, weight=1)  # specify column
+root.columnconfigure(4, weight=1)  # specify column
+root.columnconfigure(5, weight=1)  # specify column
+root.rowconfigure(0, weight=1)  # specify row
+root.rowconfigure(1, weight=1)  # specify row
+root.rowconfigure(2, weight=1)  # specify row
+root.rowconfigure(3, weight=1)  # specify row
+
+# Signal Plot Frame
+signal_plot_frame = Frame(root, bg='cyan')
+signal_plot_frame.grid(row=0, column=0, rowspan=3,
+                       columnspan=3, sticky='nsew')
+
+# Selected File Frame
+selected_file_frame = Frame(root, bg='lime')
+selected_file_frame.grid(row=0, column=3, rowspan=3,
+                         columnspan=1, sticky='nsew')
+
+# File Select Frame
+file_select_frame = Frame(root, bg='yellow')
+file_select_frame.grid(row=0, column=4, rowspan=3, columnspan=2,
+                       sticky='nsew')
+
+# Filter Frame
+filter_frame = Frame(root, bg='orange')
+filter_frame.grid(row=3, column=0, rowspan=1, columnspan=1,
+                  sticky='nsew')
+
+# Add to Signal Group Frame
+add_to_signal_group_frame = Frame(root, bg='purple')
+add_to_signal_group_frame.grid(row=3, column=1, rowspan=1,
+                               columnspan=1, sticky='nsew')
+
+# Signal Group Selection Frame
+signal_group_selection_frame = Frame(root, bg='pink')
+signal_group_selection_frame.grid(row=3, column=2, rowspan=1,
+                                  columnspan=2, sticky='nsew')
+
+# Log Frame
+log_frame = Frame(root, bg='red')
+log_frame.grid(row=3, column=4, rowspan=1, columnspan=2,
+               sticky='nsew')
+
+root.mainloop()
