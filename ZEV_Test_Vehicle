@@ -1,0 +1,76 @@
+#this organizes the test vehicles and their data sources and tests
+
+class TestVehicle(object):
+    def __init__(self, vehicle):
+        "initializes a test vehicle object"
+        
+        # information about the vehicle
+        self.vehicle = vehicle
+        self.tests = []
+        self.saved_test_files = {}
+        self.data_sources = []
+        
+    #adding and retreiving information about the vehicle
+    def __str__ (self):
+        "returns a string representation of the test vehicle"
+        return self.vehicle
+    
+    def get_vehicle(self):
+        "returns the name of the test vehicle"
+        return self.vehicle
+
+    def add_data_source(self, data_source):
+        "adds a data source to the test vehicle"
+        self.data_sources.append(data_source)
+
+    def get_data_sources(self):
+        "returns a list of data sources for the test vehicle"
+        return self.data_sources
+
+    def add_test(self, test, samples):
+        "adds a test to the test vehicle"
+
+        self.tests.append((test, samples))
+        self.saved_test_files[test] = []
+
+    def get_tests(self):
+        "returns a list of tests for the test vehicle"
+        return self.tests
+    
+    def get_test_names(self):
+        #return a lis of strings of the test names
+        test_names = []
+        for test in self.tests:
+            test_names.append(test[0])
+        return test_names
+
+    def get_test_samples(self, test, source):
+        #returns all samples from the given source for the given test
+        samples = []
+        for file in self.saved_test_files[test]:
+            if file[1] == source:
+                samples.append(file[0])
+        return samples
+
+    def add_saved_file(self, test, sample, source):
+        "adds a data file to the test vehicle"
+        self.saved_test_files[test].append((sample, source))
+        #--- Example ---
+        # self.saved_test_files = {'test1': [(1, 'dyno'), (2, 'dyno'), (1, 'air')], 'test2': [(1, 'dyno'), (2, 'dyno'), (1, 'air')]}
+  
+    def get_saved_files(self):
+        "returns a list of saved data files for the test vehicle"
+        return self.saved_test_files
+    
+    # -- processes the information already in the object and returns a list of missing files
+    def get_missing_files(self, source):
+        "returns a list of missing data files for the test vehicle"
+        missing_files = []
+        for test in self.tests:
+            n = 0
+            for file in self.saved_test_files[test[0]]:
+                if file[1] == source:
+                    n += 1
+            if n < test[1]:
+                missing_files.append((test[0], test[1] - n))
+        return missing_files
